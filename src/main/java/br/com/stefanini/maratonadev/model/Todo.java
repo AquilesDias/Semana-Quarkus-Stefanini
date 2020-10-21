@@ -12,10 +12,16 @@ import javax.persistence.NamedNativeQueries;
 import javax.persistence.NamedNativeQuery;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 @Entity
 @Table(name = "todo")
 @NamedNativeQueries({
-		@NamedNativeQuery(name = "CONSULTAR_TODO", query = "SELECT id, nome, dataCriacao FROM todo", resultClass = Todo.class) })
+		@NamedNativeQuery(name = "CONSULTAR_TODO", query = "SELECT id, nome, dataCriacao FROM todo", resultClass = Todo.class),
+		@NamedNativeQuery(name = "INSERIR_TODO", query = "INSERIR_TODO (nome, dataCriacao) "
+				                                       + "values(:nome, :dataCriacao)", resultClass = Todo.class),
+		@NamedNativeQuery(name = "EXCLUIR_TODO", query = "DELETE todo WHERE id = :id"),
+		})
 public class Todo implements Serializable {
 
     public static final Long serialVersionUID = 1L;
@@ -27,7 +33,7 @@ public class Todo implements Serializable {
 	@Column(name = "nome", length = 250, nullable = false)
 	private String nome;
 
-	@Column(name = "dataCriacao")
+	@Column(name = "dataCriacao", nullable = false, updatable = false)
 	private LocalDateTime dataCriacao;
 
     //GETTERS AND SETTERS

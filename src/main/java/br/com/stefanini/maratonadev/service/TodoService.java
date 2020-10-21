@@ -1,14 +1,13 @@
 package br.com.stefanini.maratonadev.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
 
 import br.com.stefanini.maratonadev.dao.TodoDao;
+import br.com.stefanini.maratonadev.model.Todo;
 
 
 @RequestScoped
@@ -17,18 +16,24 @@ public class TodoService {
 	@Inject
 	TodoDao dao;
 	
-	private void validar() {
+	private void validar(Todo todo) {
 		//validar regra de negocio
 	}
+	
 	@Transactional(rollbackOn = Exception.class)
-	public void inserir() {
+	public void inserir(Todo todo) {
+		
 		//validação
-		validar();
+		validar(todo);
+		
 		//chamada da dao
+		dao.inserir(todo);
+		
 	}
 	
-	public void listar() {
-		//chamada da dao
+	public List<Todo>listar() {
+		return dao.listar();
+		
 	}
 
 

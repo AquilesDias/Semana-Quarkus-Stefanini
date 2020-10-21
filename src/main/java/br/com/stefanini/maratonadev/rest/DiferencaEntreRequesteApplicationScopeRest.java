@@ -11,12 +11,13 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
 import br.com.stefanini.maratonadev.service.DiferencaEntreRequesteApplicationScopeService;
-
+ 
 
 @Path("teste")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class DiferencaEntreRequesteApplicationScopeRest {
+	
 	@Inject DiferencaEntreRequesteApplicationScopeService service;
 
 	@GET
@@ -31,7 +32,6 @@ public class DiferencaEntreRequesteApplicationScopeRest {
 	
 	@GET
 	@Path("/")
-
 	public Response obterLista() {
 		return Response
 				.status(Status.OK)

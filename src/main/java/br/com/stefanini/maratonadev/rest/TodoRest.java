@@ -30,7 +30,7 @@ public class TodoRest {
 
 //  METODO LISTAR
 	@GET
-	@Path("/")
+	@Path("")
 	@Operation(summary = "Listar listas a fazer",
 	           description = "Retorno uma lista de Todo.class")
 	
@@ -60,8 +60,8 @@ public class TodoRest {
 	            		 @Content(mediaType = "application/json",
 	            		schema = @Schema(implementation = TodoDto.class))
 	             })	
-	public Response incluir(TodoDto todoDto) {
-		service.inserir(todoDto);
+	public Response incluir(TodoDto todo) {
+		service.inserir(todo);
 		return Response
 				.status(Response.Status.CREATED)
 				.build();
@@ -72,7 +72,7 @@ public class TodoRest {
 	@Operation(summary = "Excluir uma tarefa",
 	           description = "excluir uma tarefa")
 	
-	@APIResponse(responseCode = "200",
+	@APIResponse(responseCode = "202",
 	             description = "tarefa",
 	             content = {
 	            		 @Content(mediaType = "application/json",

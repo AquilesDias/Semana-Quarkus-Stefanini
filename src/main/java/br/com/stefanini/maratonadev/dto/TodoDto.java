@@ -37,7 +37,6 @@ public class TodoDto {
 	public void setDataCriacao(LocalDateTime dataCriacao) {
 		this.dataCriacao = dataCriacao;
 	}
-	
-	
+
 
 }

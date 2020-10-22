@@ -14,17 +14,22 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+
 @Entity
 @Table(name = "todo")
 @NamedNativeQueries({
+	
 		@NamedNativeQuery(name = "CONSULTAR_TODO", query = "SELECT id, nome, dataCriacao FROM todo", resultClass = Todo.class),
-		@NamedNativeQuery(name = "INSERIR_TODO", query = "INSERIR_TODO (nome, dataCriacao) "
-				                                       + "values(:nome, :dataCriacao)", resultClass = Todo.class),
+		
+		@NamedNativeQuery(name = "INSERIR_TODO", query = "INSERT INTO todo (nome, dataCriacao) "
+				                                       + "values(:nome, :dataCriacao)"),
+		
 		@NamedNativeQuery(name = "EXCLUIR_TODO", query = "DELETE todo WHERE id = :id"),
 		})
+
 public class Todo implements Serializable {
 
-    public static final Long serialVersionUID = 1L;
+    public static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

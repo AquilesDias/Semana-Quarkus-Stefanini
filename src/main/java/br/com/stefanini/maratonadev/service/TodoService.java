@@ -45,7 +45,8 @@ public class TodoService {
 	}
 	
 	public List<TodoDto>listar() {
-		return dao.listar()
+		return dao
+				.listar()
 				.stream()
 				.map(TodoParser.get()::dto)
 				.collect(Collectors.toList());
@@ -54,6 +55,7 @@ public class TodoService {
 	
 	public void excluir(Long id) {
 		//VALIDAR SE ID É VALIDO
+		dao.excluir(id);
 	}
 
 

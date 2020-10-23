@@ -3,11 +3,13 @@ package br.com.stefanini.maratonadev.dto;
 import java.time.LocalDateTime;
 
 import javax.json.bind.annotation.JsonbDateFormat;
+import javax.validation.constraints.NotNull;
 
 public class TodoDto {
 	
 	private Long id;
 	
+	@NotNull(message="Nome obrigatorio!")
 	private String nome;
 	
 	@JsonbDateFormat("dd/MM/yyyy HH:mm")

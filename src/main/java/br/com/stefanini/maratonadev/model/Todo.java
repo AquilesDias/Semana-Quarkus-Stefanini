@@ -12,9 +12,6 @@ import javax.persistence.NamedNativeQueries;
 import javax.persistence.NamedNativeQuery;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.CreationTimestamp;
-
-
 @Entity
 @Table(name = "todo")
 @NamedNativeQueries({
@@ -25,7 +22,13 @@ import org.hibernate.annotations.CreationTimestamp;
 				                                       + "values(:nome, :dataCriacao)"),
 		
 		@NamedNativeQuery(name = "EXCLUIR_TODO", query = "DELETE todo WHERE id = :id"),
-		})
+		
+		@NamedNativeQuery(name = "CONSULTAR_NOME_REPETIDO_TODO", query = "SELECT id, nome, dataCriacao FROM todo WHERE nome = :nome", resultClass = Todo.class),
+
+       @NamedNativeQuery(name = "CONSULTAR_TODO_ID", query = "SELECT id, nome, dataCriacao FROM todo WHERE id = :id", resultClass = Todo.class),
+       
+       @NamedNativeQuery(name = "ATUALIZAR_TODO", query="UPDATE todo SET nome = :nome, dataCriacao = :dataCriacao WHERE id = :id"),
+       })
 
 public class Todo implements Serializable {
 

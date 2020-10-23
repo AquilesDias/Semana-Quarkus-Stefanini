@@ -15,7 +15,10 @@ public class TodoDto {
 	@JsonbDateFormat("dd/MM/yyyy HH:mm")
 	private LocalDateTime dataCriacao;
 
+	private String status;
 	
+	
+	//GETSET
 	public Long getId() {
 		return id;
 	}
@@ -41,4 +44,14 @@ public class TodoDto {
 	}
 
 
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+
+	
 }

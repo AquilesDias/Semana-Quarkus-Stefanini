@@ -15,6 +15,7 @@ import org.eclipse.microprofile.opentracing.Traced;
 import br.com.stefanini.maratonadev.dao.TodoDao;
 import br.com.stefanini.maratonadev.dto.TodoDto;
 import br.com.stefanini.maratonadev.model.Todo;
+import br.com.stefanini.maratonadev.model.dominio.StatusEnum;
 import br.com.stefanini.maratonadev.model.parser.TodoParser;
 
 @RequestScoped
@@ -23,6 +24,10 @@ public class TodoService {
 
 	@Inject
 	TodoDao dao;
+	 
+	
+	@Inject
+	TodoStatusService statusService;
 
 	private void validar(Todo todo) {
 
@@ -33,6 +38,12 @@ public class TodoService {
 
 	@Transactional(rollbackOn = Exception.class)
 	public void inserir(@Valid TodoDto todoDto) {
+		
+		/*
+		 * REGRA DE CRIAÇÃO
+		 * Toda tarefa criada vem por padrão na lista
+		 * TODO e com a data corrente
+		 * */
 
 		// validação
 		Todo todo = TodoParser.get().entidade(todoDto);
@@ -40,7 +51,9 @@ public class TodoService {
 
 		todo.setDataCriacao(LocalDateTime.now());
 		// chamada da dao
-		dao.inserir(todo);
+		Long id = dao.inserir(todo);
+		
+		statusService.inserir(id, StatusEnum.TODO);
 
 	}
 

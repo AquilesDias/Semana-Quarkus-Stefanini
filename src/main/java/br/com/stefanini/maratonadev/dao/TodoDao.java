@@ -31,10 +31,15 @@ public class TodoDao {
 	}
 	
 	@Transactional
-	public void inserir(Todo todo) {
+    /*
+     * Inseri um TODO e retorna o ID criado
+     * */    
+	public Long inserir(Todo todo) {
 		
 		String nomeSql = "INSERIR_TODO";
-		inserirOuAtualizar(nomeSql, todo);
+		//inserirOuAtualizar(nomeSql, todo);
+		todo.persistAndFlush();
+		return todo.getId();
 	}
 	
 	@Transactional

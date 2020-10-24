@@ -49,7 +49,10 @@ public class TodoService {
 		Todo todo = TodoParser.get().entidade(todoDto);
 		validar(todo);
 
-		todo.setDataCriacao(LocalDateTime.now());
+		//Logica abaixo substituida pelo @CreationTimestamp no modelo
+		//todo.setDataCriacao(LocalDateTime.now());
+		
+		
 		// chamada da dao
 		Long id = dao.inserir(todo);
 		
@@ -82,6 +85,7 @@ public class TodoService {
 		Todo todoBanco = buscarPorId(id);
 		todoBanco.setNome(todo.getNome());
 		dao.atualizar(todoBanco);
+		statusService.atualizar(id, dto.getStatus());
 	}
 
 	private Todo buscarPorId(Long id) {

@@ -14,7 +14,7 @@ public class TodoDto {
 	
 	@JsonbDateFormat("dd/MM/yyyy HH:mm")
 	private LocalDateTime dataCriacao;
-
+ 
 	private String status;
 	
 	

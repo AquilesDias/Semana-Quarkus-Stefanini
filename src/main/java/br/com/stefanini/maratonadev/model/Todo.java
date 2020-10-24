@@ -14,6 +14,8 @@ import javax.persistence.NamedNativeQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 
 @Entity
@@ -44,10 +46,20 @@ public class Todo extends PanacheEntityBase {
 	private String nome;
  
 	@Column(name = "dataCriacao", nullable = false, updatable = false)
+	@CreationTimestamp
 	private LocalDateTime dataCriacao;
 	
 	@OneToMany(mappedBy = "todo", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<TodoStatus> status;
+	
+	
+	public Todo(Long id) {
+		this.id = id;
+	}
+	
+	public Todo() {
+		super();
+	}
 
     //GETTERS AND SETTERS
 	public Long getId() {
@@ -74,4 +86,15 @@ public class Todo extends PanacheEntityBase {
 		this.dataCriacao = dataCriacao;
 	}
 
+
+	public List<TodoStatus> getStatus() {
+		return status;
+	}
+
+	
+	public void setStatus(List<TodoStatus> status) {
+		this.status = status;
+	}
+
+	
 }
